@@ -651,7 +651,7 @@ z-index: 2000;
       <h2>Purchase a 4chan Pass<img src="//s.4cdn.org/image/lock.gif" alt="Secure Transaction" title="Secure Transaction" style="width: 12px; height: 14px; float: right; margin: 6px 6px 0 0;" class="retina"/></h2>
           </div>
     <div class="boxcontent">
-      <form data-cg-action="https://www.4chan.org/payments/coinbase.php?action=order" data-cc-action="https://www.4chan.org/payments/owoto.php?action=order" action="" method="post" id="payment-form" autocomplete="off">
+      <form data-cg-action="https://www.4chan.org/payments/coinbase.php?action=order" data-cc-action="https://www.4chan.org/payments/order.php?action=order" action="" method="post" id="payment-form" autocomplete="off">
 
 <div id="email_collection_form">
   <div class="form-row email-row">
@@ -716,7 +716,9 @@ z-index: 2000;
       of Use</a>.
     </label>
     <br><br>
-            <input type="hidden" name="temp_id" value="snip">
+            <button type="submit" class="submit-button stripe-button-el" disabled="disabled" id="pbc-button"><span>Pay with Credit Card</span></button>
+    <br><br>
+        <input type="hidden" name="temp_id" value="snip">
     <button type="button" class="submit-button-cg stripe-button-el" disabled="disabled" id="pbac-button"><span>Pay with Digital Currency</span></button>
     <div style="margin-top: 10px">We currently accept<br>Bitcoin, Bitcoin Cash, Dai, Dogecoin, Ethereum, Litecoin, and USDC.<br>Please note that Coinbase does not support the Binance Chain or Binance Smart Chain. Do not attempt payment with BEP-2 or BEP20 tokens.</div>
     <script type="text/javascript">
@@ -820,7 +822,6 @@ z-index: 2000;
   <li>Your Pass will be valid for 12 months from the date of purchase.</li>
   <li>Use of your Pass is bound by the 4chan Pass <a href="#termsofuse">Terms of Use</a>.</li>
     <li>You are encouraged to read and understand the 4chan Pass <a href="#faq">FAQ</a> before making your purchase.</li>
-  <li>This payment will be listed on your billing statement as "OWO.TO".</li>
   <li>All sales are final. No refunds will be issued.</li>
 </ol>
     </div>
