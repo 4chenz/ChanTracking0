@@ -1217,7 +1217,7 @@ function initAdsDanbo() {
   }
   
   window.addEventListener('message', function(e) {
-    if (e.origin === 'https://hakurei.cdnbo.org' && e.data && e.data.origin === 'danbo') {
+    if (e.origin === 'https://hakurei.us-cdnbo.org' && e.data && e.data.origin === 'danbo') {
       window.initAdsFallback(e.data.unit_id);
     }
   });
@@ -1265,9 +1265,9 @@ function initAdsFallback(slot_id) {
   
   let hr = is_burichan ? 0.1 : 0.01;
   
-  if (Math.random() < hr) {
+  //if (Math.random() < hr) {
     return initAdsHome(cnt);
-  }
+  //}
   
   if (cnt_id === 'danbo-s-t') {
     if (is_burichan) {
