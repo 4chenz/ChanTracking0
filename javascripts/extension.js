@@ -4259,7 +4259,7 @@ QR.renderCaptcha = function() {
     return;
   }
   else if (window.t_captcha) {
-    TCaptcha.init(QR.captchaWidgetCnt, Main.board, QR.currentTid);
+    TCaptcha.init(QR.captchaWidgetCnt, Main.board, QR.currentTid, null, Main.stylesheet === 'tomorrow');
     TCaptcha.setErrorCb(QR.showPostError);
   }
 };
@@ -10204,9 +10204,7 @@ img.pointer {\
 #qrClose {\
   float: right;\
 }\
-#qrCaptchaContainer { width: 300px; background-color: #eee; overflow: hidden; margin-bottom: 3px }\
-.tomorrow #qrCaptchaContainer.t-qr-root { background-color: #323232; }\
-.tomorrow #qrCaptchaContainer #t-cnt { filter: invert(85%); }\
+#qrCaptchaContainer { width: 300px; background-color: #eee; overflow: hidden; margin-bottom: 3px; margin-left: 1px;}\
 #qrForm > div {\
   clear: both;\
 }\

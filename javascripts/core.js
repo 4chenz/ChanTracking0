@@ -9,7 +9,7 @@ var $L = {
 /**
  * Captcha
 */
-var TCaptcha = {
+var TCaptcha = window.TCaptcha || {
   node: null,
   
   frameNode: null,
@@ -1081,7 +1081,7 @@ function initTCaptcha() {
       thread_id = 0;
     }
     
-    TCaptcha.init(el, board, thread_id, 5);
+    TCaptcha.init(el, board, thread_id, 5, window.activeStyleSheet === 'Tomorrow');
     TCaptcha.setErrorCb(window.showPostFormError);
   }
 }
