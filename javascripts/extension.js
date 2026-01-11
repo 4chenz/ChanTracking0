@@ -4424,7 +4424,7 @@ QR.close = function() {
     QR.setCTTag();
   }
   
-  if (window.t_captcha && TCaptcha.node === QR.captchaWidgetCnt) {
+  if (window.t_captcha && TCaptcha.rootEquals(QR.captchaWidgetCnt)) {
     TCaptcha.destroy();
   }
   
