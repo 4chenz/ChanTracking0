@@ -83,6 +83,22 @@ body {
 	margin-top: 8px;
 }
 
+.danbo-slot {
+	width: 728px;
+	height: 90px;
+	margin: 10px auto;
+	overflow: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+	.danbo-slot {
+		width: 300px;
+		height: 250px;
+	}
+	
+	
+}
+
 .bsa-cnt {
 	margin: 20px 0;
 	height: 90px;
