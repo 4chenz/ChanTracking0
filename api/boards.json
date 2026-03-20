@@ -421,6 +421,7 @@
             "images": 30
         },
         "meta_description": "\u0026quot;\/gif\/ - Adult GIF\u0026quot; is 4chan's imageboard dedicated to animated adult GIFs and WEBMs.",
+        "is_archived": 1,
         "webm_audio": 1
     }, {
         "board": "h",
@@ -991,25 +992,6 @@
             "images": 60
         },
         "meta_description": "\u0026quot;\/pw\/ - Professional Wrestling\u0026quot; is 4chan's imageboard for the discussion of professional wrestling.",
-        "is_archived": 1
-    }, {
-        "board": "qa",
-        "title": "Question \u0026 Answer",
-        "ws_board": 1,
-        "per_page": 15,
-        "pages": 10,
-        "max_filesize": 4194304,
-        "max_webm_filesize": 4194304,
-        "max_comment_chars": 2000,
-        "max_webm_duration": 120,
-        "bump_limit": 310,
-        "image_limit": 150,
-        "cooldowns": {
-            "threads": 600,
-            "replies": 60,
-            "images": 60
-        },
-        "meta_description": "\u0026quot;\/qa\/ - Question \u0026amp; Answer\u0026quot; is 4chan's imageboard for question and answer threads.",
         "is_archived": 1
     }, {
         "board": "qst",
