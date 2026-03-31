@@ -34,8 +34,7 @@ var tid = /(^|\.)4channel.org$/.test(location.host) ? 'UA-166538-5' : 'UA-166538
 ga('create', tid, {'sampleRate': 1});
 ga('set', 'anonymizeIp', true);
 ga('send','pageview')</script>
-<!--<script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>-->
-<script type="text/javascript" src="//s.4cdn.org/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="//s.4cdn.org/js/jquery-3.7.1.slim.min.js"></script>
 <script type="text/javascript">
 
 var temp_id = 'snip';
@@ -54,37 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  $("#payment-form").submit(function(event) {
-    if (this.action.indexOf('/payments/coinbase') !== -1) {
-      var btn = document.getElementById('pbac-button');
-      if (btn.disabled) {
-        return false;
-      }
-      btn.disabled = true;
-      return true;
-    }
-    
-    // disable the submit button to prevent repeated clicks
-    if ($('.submit-button').attr("disabled") == "disabled") return false;
-    $('.submit-button').attr("disabled", "disabled");
-    var month = $('.card-expiry-month').val();
-    month = month.replace(/^[0]+/, '');
-    
-    createCookie( 'temp_id', 'snip', 1, '4chan.org' );
-
-    Stripe.createToken({
-        number: $('.card-number').val(),
-        exp_month: parseInt(month),
-        exp_year: parseInt("20" + "" + $('.card-expiry-year').val()),
-        cvc: $('.card-cvc').val(),
-        address_zip: $('.address-zip').val()
-    }, stripeResponseHandler);
-
-    // prevent the form from submitting with the default action
-    return false;
-  });
-
   $('#modalprice').html($('#priceinfo').html());
+
+  $("#payment-form").submit(function(event) {
+    if (!checkEmail()) return false;
+    event.preventDefault();
+    this.action = this.getAttribute('data-cc-action');
+    this.submit();
+  });
 
   $(document).on('coinbase_payment_complete', function(event, code){
      window.location = "https://www.4chan.org/payments?act=pending&amp;method=bc";
@@ -132,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //setTimeout( "$(document).trigger('coinbase_show_modal', 'ee545c6d1c1a5d5aaa3d0acaf1808652');", 2000 );
     coinbase_interval = setInterval(function() {
       if( $('#coinbase_modal_iframe_'+item_id).attr('id') ) {
-        $('#coinbase_modal_iframe_'+item_id).load(function(){
+        $('#coinbase_modal_iframe_'+item_id).on('load', function(){
         console.log("Modal has finished loading.  Triggering...");
         $(document).trigger('coinbase_show_modal', item_id);
         });
@@ -151,15 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
   $('#giftemail').keyup(doCheckEmail);
   $('#giftemailverify').keyup(doCheckEmail);
 
-  $(document).click(function(elem) {
-    var targ = elem.target;
-
-    if( targ.id && (targ.id == 'modal-bg' || targ.id == 'stripe-close-button') ) {
-        $('#stripe_payment_form').attr('style', 'display: none;');
-        $('#modal-bg').attr('style', 'display: none;');
-    }
-  });
-  
   for (let k of ['email', 'emailverify', 'giftemail', 'giftemailverify']) {
     let el = document.getElementById(k);
     el && el.addEventListener('paste', onDummy, false);
@@ -234,31 +201,6 @@ disableButton = function()
     $('.submit-button').attr("disabled", "disabled");
     $('.submit-button-cg').attr("disabled", "disabled");
 };
-
-function stripeResponseHandler(status, response)
-{
-    //console.log(status, response);
-
-    if( response.error ) {
-        $('.payment-errors').text(response.error.message + '.');
-        undisableButton();
-    } else {
-        var form$ = $('#payment-form');
-        var token = response['id'];
-        if (document.getElementById('id_stripeToken')) return;
-        if (token == '') return;
-        form$.append('<input type="hidden" name="stripeToken" id="id_stripeToken" value="' + token + '" />');
-        $('.payment-errors').text('Processing payment. Please wait...').css('color', 'red');
-        
-        var el = form$.get(0);
-        
-        if (el.hasAttribute('data-stripe-action') && el.getAttribute('data-stripe-action') !== el.action) {
-          el.action = el.getAttribute('data-stripe-action');
-        }
-        
-        el.submit();
-    }
-}
 
 function createCookie(name, value, days, domain) {
     if (days) {
@@ -533,19 +475,6 @@ margin-right: 15px;
     margin-top: -1px;
 }
 
-.form-row .stripelogo {
-  padding-left: 5px;
-  height: 26px!important;
-
-  display: block;
-  float: right;
-  padding-right: 45px;
-}
-
-.form-row .stripelogo img {
-  margin-top: -3px;
-}
-
 .form-row h3 {
     margin-top: -5px;
     margin-bottom: 0px;
@@ -568,25 +497,9 @@ padding: 5px;
     margin-top: 15px;
 }
 
-#stripe-close-button:hover {
-    cursor: pointer;
-}
-
 #coinbase_payment_form iframe {
 height: 28px!important;
 width: 150px!important;
-}
-
-#stripe_payment_form {
-display: none;
-top: 50%;
-left: 50%;
-
-margin-top: -184px;
-margin-left: -184px;
-
-position: fixed;
-z-index: 2000;
 }
 
 #modal-bg {
@@ -756,10 +669,6 @@ z-index: 2000;
         
         el = document.getElementById('payment-form');
         
-        if (!el.hasAttribute('data-stripe-action')) {
-          el.setAttribute('data-stripe-action', el.action);
-        }
-        
         el.action = el.getAttribute('data-cg-action');
         el.submit();
       }
@@ -780,10 +689,6 @@ z-index: 2000;
         }
         
         el = document.getElementById('payment-form');
-        
-        if (!el.hasAttribute('data-stripe-action')) {
-          el.setAttribute('data-stripe-action', el.action);
-        }
         
         el.action = el.getAttribute('data-pp-action');
         el.submit();
