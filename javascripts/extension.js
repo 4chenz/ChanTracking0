@@ -1273,7 +1273,7 @@ Parser.parsePost = function(pid, tid) {
   if (Config.localTime) {
     if (hasMobileLayout) {
       el = pi.parentNode.getElementsByClassName('dateTime')[0];
-      el.firstChild.nodeValue
+      el.firstChild.textContent
         = Parser.getLocaleDate(new Date(el.getAttribute('data-utc') * 1000)) + ' ';
     }
     else {
