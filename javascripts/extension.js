@@ -5949,7 +5949,7 @@ ThreadExpansion.toggle = function(tid) {
   var thread, msg, expmsg, summary, tmp;
   
   thread = $.id('t' + tid);
-  summary = thread.children[1];
+  summary = $.cls('summary', thread)[0];
   if (thread.hasAttribute('data-truncated')) {
     msg = $.id('m' + tid);
     expmsg = msg.nextSibling;
@@ -5996,7 +5996,7 @@ ThreadExpansion.fetch = function(tid) {
         ThreadExpansion.fetchXhr = null;
         
         thread = $.id('t' + tid);
-        summary = thread.children[1];
+        summary = $.cls('summary', thread)[0];
         
         if (this.status == 200) {
           tail = $.cls('reply', thread);
@@ -6074,7 +6074,7 @@ ThreadExpansion.fetch = function(tid) {
       },
       onerror: function() {
         ThreadExpansion.fetchXhr = null;
-        $.id('t' + tid).children[1].children[0].src = Main.icons.plus;
+        $.cls('summary', $.id('t' + tid))[0].children[0].src = Main.icons.plus;
         console.log('ThreadExpansion: xhr failed');
       }
     }

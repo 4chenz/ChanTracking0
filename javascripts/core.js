@@ -1244,7 +1244,7 @@ function setActiveStyleSheet(title, init) {
       link = a;
     }
     
-    if (a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
+    if (a.hasAttribute('rel') && a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       if (a.getAttribute("title") == title) {
         href = a.href;
       }
