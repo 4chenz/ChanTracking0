@@ -7,6 +7,9 @@
 <meta name="keywords" content="imageboard,image board,forum,bbs,anonymous,chan,anime,manga,ecchi,hentai,video games,english,japan" />
 <meta name="description" content="4chan is a simple image-based bulletin board where anyone can post comments and share images anonymously." />
 <title>4chan</title><link rel="canonical" href="https://4chan.org/" />
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"Organization","name":"4chan","legalName":"4chan Community Support LLC","url":"https://4chan.org/","foundingDate":"2003-10-01","duns":"144530385","naics":"519130","logo":{"@type":"ImageObject","url":"https://s.4cdn.org/image/fp/logo-transparent.png"},"sameAs":["https://en.wikipedia.org/wiki/4chan","https://www.wikidata.org/wiki/Q638265","https://twitter.com/4chan"],"hasMemberProgram":{"@type":"MemberProgram","name":"4chan Pass","url":"https://4chan.org/pass","description":"A 4chan Pass allows users to bypass CAPTCHA verification when posting and reporting posts on 4chan boards.","hasTiers":[{"@type":"MemberProgramTier","name":"Annual Pass","hasTierBenefit":["https://schema.org/TierBenefitLoyaltyPrice"]},{"@type":"MemberProgramTier","name":"3-Year Pass","hasTierBenefit":["https://schema.org/TierBenefitLoyaltyPrice"]}]}},{"@context":"https://schema.org","@type":"WebSite","name":"4chan","url":"https://4chan.org/"}]
+</script>
 <link rel="stylesheet" type="text/css" href="//s.4cdn.org/css/frontpage.12.css" />
 
 <link rel="shortcut icon" href="//s.4cdn.org/image/favicon.ico" />
@@ -15,7 +18,7 @@
 <link rel="apple-touch-icon" sizes="114x114" href="//s.4cdn.org/image/apple-touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="//s.4cdn.org/image/apple-touch-icon-ipad-retina.png" />
 <script>var danbo_rating = '__NSFW__', danbo_page = 'homenws';</script>
-<script src="https://static.danbo.org/publisher/q2g345hq2g534-4chan/js/preload.4chan.js" defer></script>
+<script src="https://hakurei.us-cdnbo.org/js/4g3qjiodfawd.preload.yotsuba.js" defer></script>
 <style type="text/css">
 .danbo-slot {
  width:728px;
@@ -40,7 +43,7 @@ ga('send','pageview')</script>
 <div id="doc">
   <div id="hd">
     <div id="logo-fp">
-      <a href="//www.4chan.org/" title="Home"><img alt="4chan" src="//s.4cdn.org/image/fp/logo-transparent.png" width="300" height="120"></a>
+      <a href="//4chan.org/" title="Home"><img alt="4chan" src="//s.4cdn.org/image/fp/logo-transparent.png" width="300" height="120"></a>
     </div>
   </div>
 <div id="bd">
@@ -65,51 +68,57 @@ function initAdsFallback() {
   
   cnt.style.display = 'none';
 }
+function danboAddSlot(n, b, m, s) {
+  let pubid = 27;
+  
+  let el = document.createElement('div');
+  el.className = 'danbo_dta';
+  
+  if (m) {
+    if (s) {
+      s = '3';
+    }
+    else {
+      s = '4';
+      el.id = 'js-danbo-rld';
+    }
+    el.setAttribute('data-danbo', `${pubid}-${b}-${s}-300-250`);
+    el.classList.add('danbo-m');
+  }
+  else {
+    if (s) {
+      s = '1';
+    }
+    else {
+      s = '2';
+      el.id = 'js-danbo-rld';
+    }
+    el.setAttribute('data-danbo', `${pubid}-${b}-${s}-728-90`);
+    el.classList.add('danbo-d');
+  }
+  
+  n.appendChild(el);
+  
+  return el;
+}
 function initAdsDanbo() {
   if (!window.Danbo) {
     return;
   }
   
-  let pubid = 27;
-  
   let b = window.danbo_page;
-  
-  let nodes = document.getElementsByClassName('danbo-slot');
   
   let m = window.matchMedia && window.matchMedia('(max-width: 480px)').matches;
   
+  let nodes = document.getElementsByClassName('danbo-slot');
+  
   for (let cnt of nodes) {
     let s = cnt.id === 'danbo-s-t';
-    
-    let el = document.createElement('div');
-    el.className = 'danbo_dta';
-    
-    if (m) {
-      if (s) {
-        s = '3';
-      }
-      else {
-        s = '4';
-      }
-      el.setAttribute('data-danbo', `${pubid}-${b}-${s}-300-250`);
-      el.classList.add('danbo-m');
-    }
-    else {
-      if (s) {
-        s = '1';
-      }
-      else {
-        s = '2';
-      }
-      el.setAttribute('data-danbo', `${pubid}-${b}-${s}-728-90`);
-      el.classList.add('danbo-d');
-    }
-    
-    cnt.appendChild(el);
+    danboAddSlot(cnt, b, m, s);
   }
   
   window.addEventListener('message', function(e) {
-    if (e.origin === 'https://hakurei.cdnbo.org' && e.data && e.data.origin === 'danbo') {
+    if (e.origin === 'https://hakurei.us-cdnbo.org' && e.data && e.data.origin === 'danbo') {
       window.initAdsFallback(e.data.unit_id);
     }
   });
@@ -265,8 +274,8 @@ document.addEventListener('DOMContentLoaded', initAdsDanbo, false);
 </div>
 <div id="ft"><ul><li class="fill" />
 <li class="first"><a href="/">Home</a></li>
-<li><a href="/4channews.php">News</a></li>
-<li><a href="http://blog.4chan.org/">Blog</a></li>
+<li><a href="/4channews">News</a></li>
+<li><a href="https://blog.4chan.org/">Blog</a></li>
 <li><a href="/faq">FAQ</a></li>
 <li><a href="/rules">Rules</a></li>
 <li><a href="/pass">Support 4chan</a></li>
@@ -276,7 +285,7 @@ document.addEventListener('DOMContentLoaded', initAdsDanbo, false);
 </ul>
 <br class="clear-bug" />
 <div id="copyright"><a href="/faq#what4chan">About</a> &bull; <a href="/feedback">Feedback</a> &bull; <a href="/legal">Legal</a> &bull; <a href="/contact">Contact</a><br /><br /><br />
-    Copyright &copy; 2003-2025 4chan community support LLC. All rights reserved.
+    Copyright &copy; 2003-2026 4chan community support LLC. All rights reserved.
     </div>
   </div>
 </div>
