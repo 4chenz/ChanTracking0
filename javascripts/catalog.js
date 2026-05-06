@@ -1876,7 +1876,7 @@ var FC = function() {
             'title="Watch" class="watchIcon"></span>');
       }
       
-      thread += '<a ' + newtab + 'href="' + provider + id + '"'
+      thread += '<a ' + newtab + 'href="' + provider + id + (entry.semantic_url ? '/' + entry.semantic_url : '') + '"'
         + (entry.imgspoiler ? ' class="imgspoiler"' : '')
         + '><img loading="lazy" alt="" id="thumb-' + id + '" class="thumb';
       
@@ -2056,7 +2056,7 @@ var FC = function() {
         pinhl = '';
       }
       
-      aTag = '<a ' + newtab + 'href="' + provider + id + '">';
+      aTag = '<a ' + newtab + 'href="' + provider + id + (entry.semantic_url ? '/' + entry.semantic_url : '') + '">';
       
       thread = '<tr id="thread-' + id + '"' + pinhl
         + '><td class="txt-no">' + aTag

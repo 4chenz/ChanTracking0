@@ -590,7 +590,7 @@ Parser.buildHTMLFromJSON = function(data, board, standalone, fromQuote) {
       
       mobileLink = '<div class="postLink mobile"><span class="info">'
         + tmp + '</span><a href="'
-        + '//boards.' + $L.d(board) + '/' + board + '/thread/' + data.no
+        + '//boards.' + $L.d(board) + '/' + board + '/thread/' + data.no + (data.semantic_url ? ('/' + data.semantic_url) : '')
         + '" class="button">View Thread</a></div>';
       postType = 'op';
       replySpan = '&nbsp; <span>[<a href="'
@@ -1131,7 +1131,7 @@ Parser.parseMobileQuotelinks = function(post) {
   quotelinks = $.cls('quotelink', post);
   
   for (i = 0; link = quotelinks[i]; ++i) {
-    t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?#p([0-9]+)$/);
+    t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?(?:\/[^#]*)?#p([0-9]+)$/);
     
     if (!t) {
       continue;
@@ -2540,7 +2540,7 @@ QuoteInline.isSelfQuote = function(node, pid, board) {
 QuoteInline.toggle = function(link, e) {
   var i, j, t, pfx, src, el, count, media;
   
-  t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?#p([0-9]+)$/);
+  t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?(?:\/[^#]*)?#p([0-9]+)$/);
   
   if (!t || QuoteInline.isSelfQuote(link, t[3], t[1])) {
     return;
@@ -5881,7 +5881,7 @@ ThreadExpansion.init = function() {
 ThreadExpansion.expandComment = function(link) {
   var ids, tid, pid, abbr;
   
-  if (!(ids = link.getAttribute('href').match(/^(?:thread\/)([0-9]+)#p([0-9]+)$/))) {
+  if (!(ids = link.getAttribute('href').match(/^(?:thread\/)([0-9]+)(?:\/[^#]*)?#p([0-9]+)$/))) {
     return;
   }
   
