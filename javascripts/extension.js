@@ -1279,7 +1279,7 @@ Parser.parsePost = function(pid, tid) {
     else {
       el = pi.getElementsByClassName('dateTime')[0];
       //el.title = this.utcOffset;
-      el.textContent
+      el.firstChild.textContent
         = Parser.getLocaleDate(new Date(el.getAttribute('data-utc') * 1000));
     }
   }
