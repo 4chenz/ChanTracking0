@@ -10062,8 +10062,8 @@ Main.onThreadMouseOver = function(e) {
   ) {
     ImageHover.show(t);
   }
-  else if ($.hasClass(t, 'dateTime')) {
-    Parser.onDateMouseOver(t);
+  else if (t.parentNode && $.hasClass(t.parentNode, 'dateTime')) {
+    Parser.onDateMouseOver(t.parentNode);
   }
   else if ($.hasClass(t, 'hand')) {
     Parser.onUIDMouseOver(t);
@@ -10090,7 +10090,10 @@ Main.onThreadMouseOut = function(e) {
   ) {
     ImageHover.hide();
   }
-  else if ($.hasClass(t, 'dateTime') || $.hasClass(t, 'hand')) {
+  else if (t.parentNode && $.hasClass(t.parentNode, 'dateTime')) {
+    Parser.onTipMouseOut(t.parentNode);
+  }
+  else if ($.hasClass(t, 'hand')) {
     Parser.onTipMouseOut(t);
   }
   else if (Config.embedYouTube && t.getAttribute('data-type') === 'yt' && !Main.hasMobileLayout) {
