@@ -2540,7 +2540,7 @@ QuoteInline.isSelfQuote = function(node, pid, board) {
 QuoteInline.toggle = function(link, e) {
   var i, j, t, pfx, src, el, count, media;
   
-  t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?(?:\/[^#]*)?#p([0-9]+)$/);
+  t = link.getAttribute('href').match(/(?:\/([a-z0-9]+)\/thread\/)?([0-9]+)?#p([0-9]+)$/);
   
   if (!t || QuoteInline.isSelfQuote(link, t[3], t[1])) {
     return;
